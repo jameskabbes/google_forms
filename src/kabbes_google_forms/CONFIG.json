@@ -1,1 +1,30 @@
-{}
+{
+    "SCOPES": ["https://www.googleapis.com/auth/forms.responses.readonly",
+                "https://www.googleapis.com/auth/forms.body.readonly"
+            ],
+    "DISCOVERY_DOC": "https://forms.googleapis.com/$discovery/rest?version=v1",
+
+    "client_secrets.!Path": {
+        "$ref": "{{data.Dir}}",
+        "method":{
+            "name": "join_Path",
+            "kwargs":{
+                "path": "google_client_secrets.json"
+            }
+        }
+    },
+    "token.!Path":{
+        "$ref": "{{data.Dir}}",
+        "method":{
+            "name": "join_Path",
+            "kwargs":{
+                "path": "token.json"
+            }
+        }
+
+    },
+    "forms":[
+        {"id": null}
+    ]
+
+}
