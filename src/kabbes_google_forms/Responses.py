@@ -14,9 +14,10 @@ class Responses( ParentPluralDict ):
         # gets the responses of your specified form:
         responses = self.Form.Forms.Service.service.forms().responses().list(formId=self.Form.id).execute()
 
-        for response_dict in responses['responses']:
-            new_Reponse = kabbes_google_forms.Response( self, response_dict )
-            self._add( new_Reponse.id, new_Reponse )
+        if 'responses' in responses:
+            for response_dict in responses['responses']:
+                new_Reponse = kabbes_google_forms.Response( self, response_dict )
+                self._add( new_Reponse.id, new_Reponse )
 
     def get_df( self, include_email=True, include_dt=True ):
 
@@ -33,7 +34,7 @@ class Responses( ParentPluralDict ):
             emails = []
             for Response in self:
                 emails.append( Response.dict[ Response._EMAIL_COL ] )
-            df[ Response._EMAIL_COL ] = emails
+            df[ kabbes_google_forms.Response._EMAIL_COL ] = emails
 
         for Question in self.Form.Questions:
             question_id = Question.id
