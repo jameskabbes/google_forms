@@ -41,8 +41,11 @@ class Responses( ParentPluralDict ):
             answers = []
 
             for Response in self:
-                Answer = Response.Answers.Answers[ question_id ]
-                answers.append( Answer.value )
+                if question_id in Response.Answers.Answers:
+                    Answer = Response.Answers.Answers[ question_id ]
+                    answers.append( Answer.value )
+                else:
+                    answers.append( None )
 
             df[Question.Item.title] = answers
 
