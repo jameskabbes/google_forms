@@ -1,5 +1,8 @@
-[GitHub Pages](https://jameskabbes.github.io/google_forms)
 # google_forms
+Google forms
+
+[Documentation](https://jameskabbes.github.io/google_forms)
+[PyPI](https://pypi.org/project/kabbes-google-forms/)
 
 # Author
 James Kabbes
