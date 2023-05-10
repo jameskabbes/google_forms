@@ -1,17 +1,23 @@
 import kabbes_client
+import kabbes_google
 import kabbes_google_forms
 
-class Client( kabbes_google_forms.Service ):
+class Client( kabbes_google.Client ):
 
     _BASE_DICT = {}
 
-    def __init__( self, dict={} ):
+    def __init__( self, dict={}, root_dict={}, **kwargs ):
 
         d = {}
         d.update( Client._BASE_DICT )
         d.update( dict )
 
+        root_inst = kabbes_client.Root( root_dict=root_dict )
         self.Package = kabbes_client.Package( kabbes_google_forms._Dir, dict=d )
-        self.cfg = self.Package.cfg
+        google_Package = kabbes_google.Client( init_service=False )
 
-        kabbes_google_forms.Service.__init__( self )
+        google_Package.cfg.merge( self.Package.cfg )
+        self.cfg = google_Package.cfg
+
+        kabbes_google.Service.__init__( self, **kwargs )
+        self.Forms = kabbes_google_forms.Forms( self )
