@@ -2,7 +2,7 @@ import kabbes_client
 import kabbes_google
 import kabbes_google_forms
 
-class Client( kabbes_google.Client ):
+class Client( kabbes_google.Service ):
 
     _BASE_DICT = {}
 
@@ -13,7 +13,7 @@ class Client( kabbes_google.Client ):
         d.update( dict )
 
         root_inst = kabbes_client.Root( root_dict=root_dict )
-        self.Package = kabbes_client.Package( kabbes_google_forms._Dir, dict=d )
+        self.Package = kabbes_client.Package( kabbes_google_forms._Dir, dict=d, root=root_inst )
         google_Package = kabbes_google.Client( init_service=False )
 
         google_Package.cfg.merge( self.Package.cfg )
